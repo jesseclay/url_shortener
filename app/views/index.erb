@@ -1,8 +1,47 @@
 <div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
+  <h1>URL Shortener!</h1>
 
-  <table>
+  <form id="url_short" action="/urls" method="post">
+  <p>Welcome, enter URL </p>  
+  <input type="text" name="full_url">
+  <input type="submit" value="shorten url!">
+  </form>
+
+  <% if @short%>
+    <p><a href="<%=@short%>">localhost:9393/<%=@short%></a></p>
+  <%end%>
+
+ <% if @bad_url%>
+    <p>That url is incorrectly formatted! Please try again.</p>
+  <%end%>
+
+
+
+  <% if @all_urls%>
+    <h2>All Shortened Urls</h2>
+    <table>
+      <tr>
+        <th>Full Url</th>
+        <th>Shortened Url</th>
+        <th>Clicks</th>
+      </tr>
+      <% @all_urls.each do |url| %>
+        <tr>
+          <td>
+            <span><%=url.full_url%></span>
+          </td>
+          <td>
+            <span><a href="<%=url.id%>">localhost:9393/<%=url.id%></a></span>
+          </td>
+          <td>
+            <span><%=url.clicks%></span>
+          </td>
+        </tr>
+      <%end%>
+    </table>
+  <%end%>
+
+  <!-- <table>
     <tr>
       <th>File Description</th>
       <th>File Location</th>
@@ -19,5 +58,5 @@
       <td>The current controller</td>
       <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
     </tr>
-  </table>
+  </table> -->
 </div>
