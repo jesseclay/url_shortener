@@ -1,0 +1,34 @@
+<% if @full_name %> <h2>Welcome to your profile page <%=@full_name%>!
+<%= erb :_logout %></h2>
+<% else %> 
+<h2>Welcome to <%=@user_name%>'s profile page!</h2>
+<% end %>
+<% if @all_urls %>
+    <h2>All Shortened Urls</h2>
+    <table>
+      <tr>
+        <th>Full Url</th>
+        <th>Shortened Url</th>
+        <%if @full_name%>
+        <th>Clicks</th>
+        <%end%>
+      </tr>
+      <% @all_urls.each do |url| %>
+        <tr>
+          <td>
+            <span><%=url.full_url%></span>
+          </td>
+          <td>
+            <span><a href="../<%=url.id%>">localhost:9393/<%=url.id%></a></span>
+          </td>
+          <%if @full_name%>
+            <td>
+              <span><%=url.clicks%></span>
+            </td>
+          <%end%>
+        </tr>
+      <%end%>
+    </table>
+  <%end%>
+
+</div>
